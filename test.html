@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моя HTML5-гра для Telegram</title>
+    <style>
+        /* Налаштування стилів для канваса */
+        body, html {
+            margin: 0;
+            overflow: hidden;
+            background-color: #282c34;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        #gameCanvas {
+            display: block;
+            margin: auto;
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Простий приклад: малювання квадрата, який рухається
+        let x = 50;
+        let y = 50;
+        let speedX = 2;
+        let speedY = 2;
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Малювання квадрата
+            ctx.fillStyle = "#FF0000";
+            ctx.fillRect(x, y, 50, 50);
+
+            // Рух квадрата
+            x += speedX;
+            y += speedY;
+
+            // Відбивання від стін
+            if (x + 50 > canvas.width || x < 0) speedX *= -1;
+            if (y + 50 > canvas.height || y < 0) speedY *= -1;
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
+    </script>
+</body>
+</html>
